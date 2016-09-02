@@ -25,6 +25,10 @@ public class Matrix {
 
 	}
 
+	public void setVal(int fil, int col, int val){
+		this.dato[fil][col] = val;
+	}
+
 	public void setMatrix(int[][] dato) {
 		this.dato = dato;
 	}
@@ -41,6 +45,16 @@ public class Matrix {
 
 	public int getCol() {
 		return dato[0].length;
+	}
+
+	public Matrix copy(){
+		int [][] datoNuevo = new int[dato.length][dato[0].length];
+		for(int i = 0; i<dato.length;i++){
+			for(int j = 0; j<dato[0].length;j++){
+				datoNuevo[i][j] = this.dato[i][j];
+			}
+		}
+		return new Matrix(datoNuevo);
 	}
 	public Matrix getCol(int col) {
 
@@ -130,5 +144,33 @@ public class Matrix {
 		for (int i = 0; i < dato.length; i++) {
 			dato[i][i]=1;
 		}
+	}
+
+	public boolean isBinary(){
+		for(int i = 0; i< this.getFil();i++){
+			for(int j=0;j<this.getCol();j++){
+				if(this.getVal(i,j)<0 || this.getVal(i,j)>1){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	public Matrix and(Matrix m){
+		if(this.getFil()!=m.getFil() || this.getCol()!=m.getCol()){
+			return null;
+		}
+		if(!this.isBinary() && !m.isBinary()){
+			return null;
+		}
+		Matrix resultado = new Matrix(this.getFil(),this.getCol());
+		for(int i = 0; i< this.getFil();i++){
+			for(int j=0;j<this.getCol();j++){
+				resultado.setVal(i,j, this.getVal(i,j)*m.getVal(i,j));
+			}
+		}
+		return resultado;
+
+
 	}
 }
