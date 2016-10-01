@@ -35,5 +35,24 @@ public class ProcesadorPetri {
 	synchronized public void imprimirMarcado(){
 		System.out.println("Marcado: "+ marcado.toString() );	
 	}
+
+	synchronized public Matrix getSensibilizadas(){
+		Matrix sensibilizadas = new Matrix(1,I.getCol());
+		for(int j = 0; j<I.getCol();j++){
+			Matrix nuevoMarcado = marcado.copy();
+			for(int i =0; i<I.getFil();i++){
+				if(I.getVal(i,j)< 0){
+					nuevoMarcado.setVal(0,j,nuevoMarcado.getVal(0,i)+I.getVal(i,j));
+				}
+			}
+			if(nuevoMarcado.isPos()){
+				sensibilizadas.setVal(0,j,1);
+			}
+			else{
+				sensibilizadas.setVal(0,j,0);
+			}
+		}
+		return sensibilizadas;
+	}
 	
 }
