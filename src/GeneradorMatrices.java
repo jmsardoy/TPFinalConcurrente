@@ -45,14 +45,22 @@ public class GeneradorMatrices {
     }
 
     public Matrix cargarIncidencia(){
-        archivo = new File("incidencia.rdp");
-        Matrix incidencia_aux = cargarDatos(archivo);
+        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        File archivo = new File(path);
+        path = archivo.getParent();
+        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/incidencia.rdp";
+        File archivo2 = new File(path);
+        Matrix incidencia_aux = cargarDatos(archivo2);
         return incidencia_aux;
     }
 
     public Matrix cargarMarcado(){
-        archivo = new File("marcado.rdp");
-        Matrix marcado_aux = cargarDatos(archivo);
+        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        File archivo = new File(path);
+        path = archivo.getParent();
+        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/marcado.rdp";
+        File archivo2 = new File(path);
+        Matrix marcado_aux = cargarDatos(archivo2);
         return marcado_aux;
     }
 
