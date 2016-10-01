@@ -184,4 +184,13 @@ public class Matrix {
 		}
 		return -1;
 	}
+
+	public boolean isNull(){
+		for(int i = 0; i< this.getFil();i++){
+			for(int j = 0; j<this.getCol();j++){
+				if(this.getVal(i,j) != 0) return false;
+			}
+		}
+		return true;
+	}
 }
