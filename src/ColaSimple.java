@@ -11,7 +11,7 @@ public class ColaSimple {
         this.semaphore = new Semaphore(0,true);
     }
 
-    synchronized public void encolar(){
+    public void encolar(){
         try {
             if(this.semaphore.availablePermits() <= 0){
                 numeroDeBloqueados++;
@@ -22,9 +22,9 @@ public class ColaSimple {
         }
     }
 
-    synchronized public void liberar(){
+    public void liberar(){
         if(this.numeroDeBloqueados>0){
-            numeroDeBloqueados--;
+            this.numeroDeBloqueados--;
             this.semaphore.release();
         }
     }
