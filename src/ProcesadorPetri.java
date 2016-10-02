@@ -13,7 +13,7 @@ public class ProcesadorPetri {
 	
 	synchronized public boolean disparar (Matrix disparo){
 		
-		Matrix multiplicacion = I.mult(disparo);		//resultado de I*d
+		Matrix multiplicacion = I.mult(disparo.transpose());		//resultado de I*d
 		
 		Matrix nuevoMarcado = marcado.plus(multiplicacion.transpose());		//resultado de m + I*d
 

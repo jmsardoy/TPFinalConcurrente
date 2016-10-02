@@ -65,8 +65,12 @@ public class GeneradorMatrices {
     }
 
     public Matrix cargarPolitica(){
-        archivo = new File("politica.rdp");
-        Matrix politica_aux = cargarDatos(archivo);
+        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        File archivo = new File(path);
+        path = archivo.getParent();
+        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/politica.rdp";
+        File archivo2 = new File(path);
+        Matrix politica_aux = cargarDatos(archivo2);
         return politica_aux;
     }
 }
