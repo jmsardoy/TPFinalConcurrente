@@ -11,7 +11,6 @@ public class Matrix {
 	}
 
 	public Matrix(int size) {
-		// TODO Auto-generated constructor stub
 		dato=new int[size][size];
 		
 	}
@@ -192,5 +191,23 @@ public class Matrix {
 			}
 		}
 		return true;
+	}
+
+	public Matrix not(){
+		if(!this.isBinary()) throw new RuntimeException("Matrix Not Binary.");
+
+		Matrix nuevaMatrix = new Matrix(this.getFil(), this.getCol());
+		for (int i = 0; i < this.getFil(); i++) {
+			for (int j = 0; j < this.getCol(); j++) {
+				if (this.getVal(i, j) == 1){
+					nuevaMatrix.setVal(i,j,0);
+				}
+				else{
+					nuevaMatrix.setVal(i,j,1);
+				}
+			}
+		}
+		return nuevaMatrix;
+
 	}
 }

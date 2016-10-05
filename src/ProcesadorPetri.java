@@ -3,13 +3,14 @@ public class ProcesadorPetri {
 
 	
 	// Matriz de incidencia y marcado
-	Matrix I, marcado, inhibidores;
+	Matrix I, marcado, inhibidores, lectores;
 	
-	public ProcesadorPetri(Matrix incidencia, Matrix marcaInicial, Matrix inhibidores)
+	public ProcesadorPetri(Matrix incidencia, Matrix marcaInicial, Matrix inhibidores, Matrix lectores)
 	{
 		this.I = incidencia;
 		this.marcado = marcaInicial;
 		this.inhibidores = inhibidores;
+        this.lectores = lectores;
 	}
 	
 	synchronized public boolean disparar (Matrix disparo){
@@ -49,7 +50,12 @@ public class ProcesadorPetri {
 
 		// deshabilitadas = inhibidores * sensibilizadas
 		Matrix deshabilitadas = inhibidores.transpose().mult(marcado.transpose());
-		sensibilizadas = this.deshabilitar(sensibilizadas.transpose(),deshabilitadas).transpose();
+		sensibilizadas = sensibilizadas.and(deshabilitadas.not());
+        //sensibilizadas = this.deshabilitar(sensibilizadas.transpose(),deshabilitadas).transpose();
+
+        Matrix lectoresHabilitados = lectores.transpose().mult(marcado.transpose());
+        sensibilizadas = sensibilizadas.and(lectoresHabilitados);
+
 		return sensibilizadas;
 	}
 
