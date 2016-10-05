@@ -53,8 +53,8 @@ public class ProcesadorPetri {
 		sensibilizadas = sensibilizadas.and(deshabilitadas.not());
         //sensibilizadas = this.deshabilitar(sensibilizadas.transpose(),deshabilitadas).transpose();
 
-        Matrix lectoresHabilitados = lectores.transpose().mult(marcado.transpose()).transpose();
-        sensibilizadas = sensibilizadas.transpose().and(lectoresHabilitados.transpose());
+        Matrix lectoresDeshabilitados = lectores.transpose().mult(marcado.toBinary().not().transpose()).transpose();
+        sensibilizadas = sensibilizadas.and(lectoresDeshabilitados.not());
 
 		return sensibilizadas;
 	}

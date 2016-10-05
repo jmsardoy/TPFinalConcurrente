@@ -102,5 +102,4 @@ public class GeneradorMatrices {
         Matrix transaut_aux = cargarDatos(archivo2);
         return transaut_aux;
     }
-
 }

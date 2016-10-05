@@ -15,7 +15,7 @@ public class Main {
         int cantidad_transiciones = incidencia.getCol();
 
         Politica politica = new Politica(politicas);
-        ProcesadorPetri proce = new ProcesadorPetri(incidencia,marcado, inhibidores);
+        ProcesadorPetri proce = new ProcesadorPetri(incidencia,marcado, inhibidores, lectores);
         Colas cola = new Colas(cantidad_transiciones);
 
         System.out.println("Incidencia = \n"+incidencia.toString());
