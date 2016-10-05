@@ -73,4 +73,14 @@ public class GeneradorMatrices {
         Matrix politica_aux = cargarDatos(archivo2);
         return politica_aux;
     }
+
+    public Matrix cargarInhibidores(){
+        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        File archivo = new File(path);
+        path = archivo.getParent();
+        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/inhibidores.rdp";
+        File archivo2 = new File(path);
+        Matrix inhibidores_aux = cargarDatos(archivo2);
+        return inhibidores_aux;        
+    }
 }
