@@ -8,6 +8,8 @@ public class Main {
         Matrix incidencia = gen.cargarIncidencia();
         Matrix marcado = gen.cargarMarcado();
         Matrix politicas = gen.cargarPolitica();
+        Matrix inhibidores = gen.cargarInhibidores();
+        Matrix lectores = gen.cargarLectores();
 
         int cantidad_transiciones = incidencia.getCol();
 
@@ -18,6 +20,8 @@ public class Main {
         System.out.println("Incidencia = \n"+incidencia.toString());
         System.out.println("Marcado = \n"+marcado.toString());
         System.out.println("Politicas = \n"+politicas.toString());
+        System.out.println("Inhibidores = \n"+inhibidores.toString());
+        System.out.println("Lectores = \n"+lectores.toString());
 
         Monitor monitor = new Monitor(proce, politica, cola);
 
