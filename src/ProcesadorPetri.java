@@ -25,24 +25,7 @@ public class ProcesadorPetri {
             System.out.println("disparo no posible");
             return false;
         }
-	    /*
-	    Matrix multiplicacion = I.mult(disparo.transpose());		//resultado de I*d
-		
-		Matrix nuevoMarcado = marcado.plus(multiplicacion.transpose());		//resultado de m + I*d
 
-		//se chequea si el marcado resultante es positivo.
-		//en caso de ser positivo se actualiza el marcado y devuelve true
-		//en caso de tener algun elemento negativo devuelve false y no actualiza
-		//el marcado.
-		if(nuevoMarcado.isPos()){
-			marcado = nuevoMarcado;
-			System.out.println("disparo exitoso");
-			return true;
-		}
-		else{
-			System.out.println("disparo no posible");
-			return false;
-		}*/
 	}
 	
 	synchronized public void imprimirMarcado(){
@@ -50,26 +33,23 @@ public class ProcesadorPetri {
 	}
 
 	synchronized public Matrix getSensibilizadas(){
-		Matrix sensibilizadas = new Matrix(1,I.getCol());
-		for(int j = 0; j<I.getCol();j++){
-			Matrix nuevoMarcado = marcado.copy();
-			for(int i =0; i<I.getFil();i++){
-				if(I.getVal(i,j)< 0){
-					nuevoMarcado.setVal(0,j,nuevoMarcado.getVal(0,i)+I.getVal(i,j));
-				}
-			}
-			if(nuevoMarcado.isPos()){
-				sensibilizadas.setVal(0,j,1);
-			}
-			else{
-				sensibilizadas.setVal(0,j,0);
-			}
-		}
+		Matrix sensibilizadas = new Matrix(1, I.getCol());
+        for(int i = 0; i<I.getCol();i++){
+            Matrix disparoAux = new Matrix(1,I.getCol());
+            disparoAux.setVal(0,i,1);
+            Matrix multiplicacion = I.mult(disparoAux.transpose());		//resultado de I*d
+            Matrix nuevoMarcado = marcado.plus(multiplicacion.transpose());
+            if(nuevoMarcado.isPos()){
+                sensibilizadas.setVal(0,i,1);
+            }
+            else{
+                sensibilizadas.setVal(0,i,0);
+            }
+        }
 
 		// deshabilitadas = inhibidores * sensibilizadas
-		Matrix deshabilitadas = inhibidores.transpose().mult(sensibilizadas.transpose());
-		sensibilizadas = this.deshabilitar(sensibilizadas,deshabilitadas).transpose();
-
+		Matrix deshabilitadas = inhibidores.transpose().mult(marcado.transpose());
+		sensibilizadas = this.deshabilitar(sensibilizadas.transpose(),deshabilitadas).transpose();
 		return sensibilizadas;
 	}
 
@@ -82,11 +62,11 @@ public class ProcesadorPetri {
 
 		Matrix nuevoSensibilizado = new Matrix(sensibilizadas.getFil(),1);
 		for(int i = 0; i< sensibilizadas.getFil(); i++){
-		    if(sensibilizadas.getVal(i,1) == 1 && deshabilitadas.getVal(i,1) == 0){
-		        nuevoSensibilizado.setVal(i,1,1);
+		    if(sensibilizadas.getVal(i,0) == 1 && deshabilitadas.getVal(i,0) == 0){
+		        nuevoSensibilizado.setVal(i,0,1);
             }
             else{
-                nuevoSensibilizado.setVal(i,1,0);
+                nuevoSensibilizado.setVal(i,0,0);
             }
 		}
 		return nuevoSensibilizado;
