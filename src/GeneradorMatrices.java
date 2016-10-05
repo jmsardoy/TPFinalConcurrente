@@ -81,6 +81,15 @@ public class GeneradorMatrices {
         path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/inhibidores.rdp";
         File archivo2 = new File(path);
         Matrix inhibidores_aux = cargarDatos(archivo2);
-        return inhibidores_aux;        
+        return inhibidores_aux;
+    }
+    public Matrix cargarLectores(){
+        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        File archivo = new File(path);
+        path = archivo.getParent();
+        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/lectores.rdp";
+        File archivo2 = new File(path);
+        Matrix lectores_aux = cargarDatos(archivo2);
+        return lectores_aux;
     }
 }
