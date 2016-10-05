@@ -3,12 +3,13 @@ public class ProcesadorPetri {
 
 	
 	// Matriz de incidencia y marcado
-	Matrix I, marcado;
+	Matrix I, marcado, inhibidores;
 	
-	public ProcesadorPetri(Matrix incidencia, Matrix marcaInicial)
+	public ProcesadorPetri(Matrix incidencia, Matrix marcaInicial, Matrix inhibidores)
 	{
-		I = incidencia;
-		marcado = marcaInicial;
+		this.I = incidencia;
+		this.marcado = marcaInicial;
+		this.inhibidores = inhibidores;
 	}
 	
 	synchronized public boolean disparar (Matrix disparo){
@@ -52,7 +53,31 @@ public class ProcesadorPetri {
 				sensibilizadas.setVal(0,j,0);
 			}
 		}
+
+		// deshabilitadas = inhibidores * sensibilizadas
+		Matrix deshabilitadas = inhibidores.transpose().mult(sensibilizadas.transpose());
+		sensibilizadas = this.deshabilitar(sensibilizadas,deshabilitadas).transpose();
+
 		return sensibilizadas;
+	}
+
+	private Matrix deshabilitar(Matrix sensibilizadas, Matrix deshabilitadas){
+		if ( (deshabilitadas.getFil() != sensibilizadas.getFil()) ||
+                (deshabilitadas.getCol() != 1 )||
+                (sensibilizadas.getCol() != 1) ) {
+            throw new RuntimeException("Illegal matrix dimensions.");
+        }
+
+		Matrix nuevoSensibilizado = new Matrix(sensibilizadas.getFil(),1);
+		for(int i = 0; i< sensibilizadas.getFil(); i++){
+		    if(sensibilizadas.getVal(i,1) == 1 && deshabilitadas.getVal(i,1) == 0){
+		        nuevoSensibilizado.setVal(i,1,1);
+            }
+            else{
+                nuevoSensibilizado.setVal(i,1,0);
+            }
+		}
+		return nuevoSensibilizado;
 	}
 	
 }
