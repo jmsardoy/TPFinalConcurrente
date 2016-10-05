@@ -14,7 +14,19 @@ public class ProcesadorPetri {
 	
 	synchronized public boolean disparar (Matrix disparo){
 		
-		Matrix multiplicacion = I.mult(disparo.transpose());		//resultado de I*d
+		Matrix sensibilizadas = this.getSensibilizadas();
+        if(!disparo.and(sensibilizadas).isNull()){
+            Matrix multiplicacion = I.mult(disparo.transpose());
+            this.marcado = this.marcado.plus(multiplicacion.transpose());
+            System.out.println("disparo exitoso");
+            return true;
+        }
+        else{
+            System.out.println("disparo no posible");
+            return false;
+        }
+	    /*
+	    Matrix multiplicacion = I.mult(disparo.transpose());		//resultado de I*d
 		
 		Matrix nuevoMarcado = marcado.plus(multiplicacion.transpose());		//resultado de m + I*d
 
@@ -30,7 +42,7 @@ public class ProcesadorPetri {
 		else{
 			System.out.println("disparo no posible");
 			return false;
-		}
+		}*/
 	}
 	
 	synchronized public void imprimirMarcado(){
