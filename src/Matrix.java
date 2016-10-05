@@ -157,10 +157,10 @@ public class Matrix {
 	}
 	public Matrix and(Matrix m){
 		if(this.getFil()!=m.getFil() || this.getCol()!=m.getCol()){
-			return null;
+            throw new RuntimeException("Illegal matrix dimensions.");
 		}
 		if(!this.isBinary() && !m.isBinary()){
-			return null;
+            throw new RuntimeException("Matrix not binary");
 		}
 		Matrix resultado = new Matrix(this.getFil(),this.getCol());
 		for(int i = 0; i< this.getFil();i++){

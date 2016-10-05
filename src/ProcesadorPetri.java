@@ -49,12 +49,12 @@ public class ProcesadorPetri {
         }
 
 		// deshabilitadas = inhibidores * sensibilizadas
-		Matrix deshabilitadas = inhibidores.transpose().mult(marcado.transpose());
+		Matrix deshabilitadas = inhibidores.transpose().mult(marcado.transpose()).transpose();
 		sensibilizadas = sensibilizadas.and(deshabilitadas.not());
         //sensibilizadas = this.deshabilitar(sensibilizadas.transpose(),deshabilitadas).transpose();
 
-        Matrix lectoresHabilitados = lectores.transpose().mult(marcado.transpose());
-        sensibilizadas = sensibilizadas.and(lectoresHabilitados);
+        Matrix lectoresHabilitados = lectores.transpose().mult(marcado.transpose()).transpose();
+        sensibilizadas = sensibilizadas.transpose().and(lectoresHabilitados.transpose());
 
 		return sensibilizadas;
 	}
