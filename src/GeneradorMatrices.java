@@ -92,4 +92,15 @@ public class GeneradorMatrices {
         Matrix lectores_aux = cargarDatos(archivo2);
         return lectores_aux;
     }
+
+    public Matrix cargarTransicionesAutomaticas(){
+        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        File archivo = new File(path);
+        path = archivo.getParent();
+        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/transaut.rdp";
+        File archivo2 = new File(path);
+        Matrix transaut_aux = cargarDatos(archivo2);
+        return transaut_aux;
+    }
+
 }
