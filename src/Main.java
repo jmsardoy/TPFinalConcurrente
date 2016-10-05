@@ -10,11 +10,12 @@ public class Main {
         Matrix politicas = gen.cargarPolitica();
         Matrix inhibidores = gen.cargarInhibidores();
         Matrix lectores = gen.cargarLectores();
+        Matrix transaut = gen.cargarTransicionesAutomaticas();
 
         int cantidad_transiciones = incidencia.getCol();
 
         Politica politica = new Politica(politicas);
-        ProcesadorPetri proce = new ProcesadorPetri(incidencia,marcado);
+        ProcesadorPetri proce = new ProcesadorPetri(incidencia,marcado, inhibidores);
         Colas cola = new Colas(cantidad_transiciones);
 
         System.out.println("Incidencia = \n"+incidencia.toString());
@@ -22,6 +23,7 @@ public class Main {
         System.out.println("Politicas = \n"+politicas.toString());
         System.out.println("Inhibidores = \n"+inhibidores.toString());
         System.out.println("Lectores = \n"+lectores.toString());
+        System.out.println("Transiciones automaticas = \n"+transaut.toString());
 
         Monitor monitor = new Monitor(proce, politica, cola);
 
