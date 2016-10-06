@@ -45,7 +45,9 @@ public class Carrito implements Runnable {
     }
     private void updateDisparo(){
         indiceActual++;
+        indiceActual = indiceActual%6;
         disparoActual = transiciones[indiceActual];
+
     }
 
     private Matrix disparoSiguiente(){
@@ -54,7 +56,7 @@ public class Carrito implements Runnable {
         for(int i = 0; i<CANTIDAD_DE_TRANSICIONES; i++){
             vector[0][i] = 0;
         }
-        vector[0][disparoActual] = 1;
+        vector[0][disparoActual-1] = 1;
         updateDisparo();
         Matrix disparo = new Matrix(vector);
         return disparo;
