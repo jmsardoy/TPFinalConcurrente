@@ -183,13 +183,14 @@ public class Matrix {
 	}
 
 	public int matrixToIndex() {
-		if (this.getFil() == 1) {
-			for (int i = 0; i < this.getCol(); i++) {
-				if (this.getVal(0, i) > 0) {
-					return i;
-				}
-			}
+		if (this.getFil() != 1) {
+			throw new RuntimeException("Illegal matrix dimensions.");
 		}
+		for (int i = 0; i < this.getCol(); i++) {
+            if (this.getVal(0, i) > 0) {
+                return i;
+            }
+        }
 		return -1;
 	}
 

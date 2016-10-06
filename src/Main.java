@@ -27,8 +27,9 @@ public class Main {
 
         Monitor monitor = new Monitor(proce, politica, cola);
 
-        Thread tre1 = new Thread(new Productor(monitor));
-        Thread tre2 = new Thread(new Consumidor(monitor));
+        Thread tre1 = new Thread(new Carrito(monitor, 3, "Carrito 1"),"Carrito 1");
+        Thread tre2 = new Thread(new Carrito(monitor, 7,"Carrito 2"),"Carrito 2");
+        Thread tre3 = new Thread((new BombaDeAgua(monitor)));
 
         try {
             Thread.sleep(2000);
@@ -37,6 +38,7 @@ public class Main {
         }
         tre1.start();
         tre2.start();
+        tre3.start();
 
     }
 }
