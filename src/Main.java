@@ -24,7 +24,7 @@ public class Main {
         System.out.println("Politicas = \n"+politicas.toString());
         System.out.println("Inhibidores = \n"+inhibidores.toString());
         System.out.println("Lectores = \n"+lectores.toString());
-        //System.out.println("Tiempo= \n"+tiempo.toString());
+        tiempo.imprimir();
         //System.out.println("Transiciones automaticas = \n"+transaut.toString());
 
         Monitor monitor = new Monitor(proce, politica, cola);

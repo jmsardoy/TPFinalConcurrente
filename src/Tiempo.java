@@ -28,5 +28,14 @@ public class Tiempo {
         return infoTiempo.get(transicion).getSleepTime();
     }
 
+    public void imprimir(){
+        System.out.println("Tiempo: \n");
+        for(int i=0; i<infoTiempo.size(); i++){
+            System.out.println("Transicion: "+infoTiempo.get(i).getTransicion());
+            System.out.println("Tiempo Inicial: "+infoTiempo.get(i).getT_ini());
+            System.out.println("Tiempo Final: "+infoTiempo.get(i).getT_fin());
+        }
+    }
+
 
 }

@@ -64,11 +64,14 @@ public class GeneradorMatrices {
             lector = new BufferedReader((new FileReader(archivo2)));
             linea = null;
             while ((linea = lector.readLine()) != null) {
-                t_ini = 0;
-                t_fin = 0;
                 String[] fila = linea.split("-");
                 t_ini = Integer.parseInt(fila[0]);
-                t_fin = Integer.parseInt(fila[1]);
+                if (fila[1].equals("INF")) {
+                    t_fin = 9999999;
+                }else{
+                    t_fin = Integer.parseInt(fila[1]);
+                }
+
 
                 intv = new Intervalo(transicion, t_ini, t_fin);
                 infoTiempo.add(transicion, intv);
