@@ -3,6 +3,7 @@
  */
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class GeneradorMatrices {
 
@@ -26,14 +27,14 @@ public class GeneradorMatrices {
             while ((linea = lector.readLine()) != null) {
                 numeroLinea++;
                 String[] fila = linea.split(" ");
-                for(numeroColumna=0; numeroColumna<fila.length; numeroColumna++){
+                for (numeroColumna = 0; numeroColumna < fila.length; numeroColumna++) {
                     int valor = Integer.parseInt(fila[numeroColumna]);
                     mat[numeroLinea][numeroColumna] = valor;
                 }
-                matriziti = new Matrix(numeroLinea+1, numeroColumna);
-                for(int i = 0;i<=numeroLinea;i++)
-                    for(int j = 0;j<numeroColumna;j++){
-                        matriziti.setDato(i,j,mat[i][j]);
+                matriziti = new Matrix(numeroLinea + 1, numeroColumna);
+                for (int i = 0; i <= numeroLinea; i++)
+                    for (int j = 0; j < numeroColumna; j++) {
+                        matriziti.setDato(i, j, mat[i][j]);
                     }
             }
         } catch (FileNotFoundException e) {
@@ -44,62 +45,82 @@ public class GeneradorMatrices {
         return matriziti;
     }
 
-    public Matrix cargarIncidencia(){
+    Tiempo cargarTiempo() {
+
+        /*Abro el archivo*/
+        int t_ini = 0, t_fin = 0, transicion = 0;
+        Intervalo intv;
+        ArrayList<Intervalo> infoTiempo = new ArrayList<Intervalo>();
+        Tiempo tiempo;
+
         String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
         File archivo = new File(path);
         path = archivo.getParent();
-        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/incidencia.rdp";
+        path = path.substring(path.lastIndexOf("\\") + 1, path.length()) + "/tiempo.rdp";
         File archivo2 = new File(path);
-        Matrix incidencia_aux = cargarDatos(archivo2);
-        return incidencia_aux;
+
+        /*Lo leo y cargo en el array de intervalos*/
+        try {
+            lector = new BufferedReader((new FileReader(archivo2)));
+            linea = null;
+            while ((linea = lector.readLine()) != null) {
+                t_ini = 0;
+                t_fin = 0;
+                String[] fila = linea.split("-");
+                t_ini = Integer.parseInt(fila[0]);
+                t_fin = Integer.parseInt(fila[1]);
+
+                intv = new Intervalo(transicion, t_ini, t_fin);
+                infoTiempo.add(transicion, intv);
+                transicion++;
+            }
+        }
+        catch (FileNotFoundException e) {e.printStackTrace();}
+        catch (IOException e) {e.printStackTrace();}
+
+        /*creo tiempo y lo devuelvo*/
+        tiempo = new Tiempo(infoTiempo);
+        return tiempo;
+    }
+
+
+
+
+
+    public Matrix cargarArchivo(String String_archivo){
+        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        File archivo = new File(path);
+        path = archivo.getParent();
+        path = path.substring(path.lastIndexOf("\\")+1,path.length())+String_archivo;
+        File archivo2 = new File(path);
+        Matrix matrix = cargarDatos(archivo2);
+        return matrix;
+    }
+
+    public Matrix cargarIncidencia(){
+       return cargarArchivo("/incidencia.rdp");
     }
 
     public Matrix cargarMarcado(){
-        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        File archivo = new File(path);
-        path = archivo.getParent();
-        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/marcado.rdp";
-        File archivo2 = new File(path);
-        Matrix marcado_aux = cargarDatos(archivo2);
-        return marcado_aux;
-    }
+        return cargarArchivo("/marcado.rdp");
+            }
 
     public Matrix cargarPolitica(){
-        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        File archivo = new File(path);
-        path = archivo.getParent();
-        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/politica.rdp";
-        File archivo2 = new File(path);
-        Matrix politica_aux = cargarDatos(archivo2);
-        return politica_aux;
+        return cargarArchivo("/politica.rdp");
     }
 
-    public Matrix cargarInhibidores(){
-        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        File archivo = new File(path);
-        path = archivo.getParent();
-        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/inhibidores.rdp";
-        File archivo2 = new File(path);
-        Matrix inhibidores_aux = cargarDatos(archivo2);
-        return inhibidores_aux;
+    public Matrix cargarInhibidores() {
+        return cargarArchivo("/inhibidores.rdp");
     }
+
     public Matrix cargarLectores(){
-        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        File archivo = new File(path);
-        path = archivo.getParent();
-        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/lectores.rdp";
-        File archivo2 = new File(path);
-        Matrix lectores_aux = cargarDatos(archivo2);
-        return lectores_aux;
+        return cargarArchivo("/lectores.rdp");
     }
 
     public Matrix cargarTransicionesAutomaticas(){
-        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        File archivo = new File(path);
-        path = archivo.getParent();
-        path = path.substring(path.lastIndexOf("\\")+1,path.length())+"/transaut.rdp";
-        File archivo2 = new File(path);
-        Matrix transaut_aux = cargarDatos(archivo2);
-        return transaut_aux;
+        return cargarArchivo("/transaut.rdp");
     }
+
+
+
 }

@@ -10,7 +10,8 @@ public class Main {
         Matrix politicas = gen.cargarPolitica();
         Matrix inhibidores = gen.cargarInhibidores();
         Matrix lectores = gen.cargarLectores();
-        Matrix transaut = gen.cargarTransicionesAutomaticas();
+        //Matrix transaut = gen.cargarTransicionesAutomaticas();
+        Tiempo tiempo = gen.cargarTiempo();
 
         int cantidad_transiciones = incidencia.getCol();
 
@@ -23,7 +24,8 @@ public class Main {
         System.out.println("Politicas = \n"+politicas.toString());
         System.out.println("Inhibidores = \n"+inhibidores.toString());
         System.out.println("Lectores = \n"+lectores.toString());
-        System.out.println("Transiciones automaticas = \n"+transaut.toString());
+        //System.out.println("Tiempo= \n"+tiempo.toString());
+        //System.out.println("Transiciones automaticas = \n"+transaut.toString());
 
         Monitor monitor = new Monitor(proce, politica, cola);
 
