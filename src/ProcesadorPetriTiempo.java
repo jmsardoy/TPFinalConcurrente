@@ -1,6 +1,4 @@
-/**
- * Created by juanso on 20/11/16.
- */
+
 public class ProcesadorPetriTiempo extends ProcesadorPetri {
 
     Tiempo tiempo;
@@ -27,11 +25,13 @@ public class ProcesadorPetriTiempo extends ProcesadorPetri {
             }
             else{
                 //no puede disparar por el tiempo
+                System.out.println("disparo no posible por tiempos");
                 return tiempo.getSleepTime(disparo.matrixToIndex());
             }
         }
         else{
             //no puede disparar porque no esta sensibilizada
+            System.out.println("disparo no posiblie por sensibilizacion");
             return -1;
         }
     }
