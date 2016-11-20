@@ -14,7 +14,7 @@ public class BombaDeAgua implements Runnable {
 
 
             System.out.println("Trato cargar aguita.");
-            monitor.dispararTransicion(disp);
+            monitor.dispararTransicionConTiempo(disp);
             System.out.println("Cargue aguita.");
 
 
