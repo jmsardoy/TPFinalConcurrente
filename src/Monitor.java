@@ -72,6 +72,7 @@ public class Monitor {
             try {
                 while (!ejecute) {   //hasta que termine de ejecutar
                     long resultado_disparo = pro_petri.dispararConTiempo(transicion); //trato de disparar
+                    System.out.println("resultado disparo: "+resultado_disparo);
                     if (resultado_disparo == 0) { //disparo exitoso
                         pro_petri.imprimirMarcado();
                         while (!ejecute_independientes) {

@@ -10,13 +10,13 @@ public class Main {
         Matrix politicas = gen.cargarPolitica();
         Matrix inhibidores = gen.cargarInhibidores();
         Matrix lectores = gen.cargarLectores();
-        //Matrix transaut = gen.cargarTransicionesAutomaticas();
+        Matrix transaut = gen.cargarTransicionesAutomaticas();
         Tiempo tiempo = gen.cargarTiempo();
 
         int cantidad_transiciones = incidencia.getCol();
 
         Politica politica = new Politica(politicas);
-        ProcesadorPetri proce = new ProcesadorPetri(incidencia,marcado, inhibidores, lectores);
+        ProcesadorPetriTiempo proce = new ProcesadorPetriTiempo(incidencia,marcado, inhibidores, lectores, tiempo);
         Colas cola = new Colas(cantidad_transiciones);
 
         System.out.println("Incidencia = \n"+incidencia.toString());
@@ -24,10 +24,11 @@ public class Main {
         System.out.println("Politicas = \n"+politicas.toString());
         System.out.println("Inhibidores = \n"+inhibidores.toString());
         System.out.println("Lectores = \n"+lectores.toString());
+        System.out.println("Transiciones automaticas = \n"+transaut.toString());
         tiempo.imprimir();
-        //System.out.println("Transiciones automaticas = \n"+transaut.toString());
 
-        Monitor monitor = new Monitor(proce, politica, cola);
+
+        Monitor monitor = new Monitor(proce, politica, cola, transaut);
 
         Thread tre1 = new Thread(new Carrito(monitor, 3, "Carrito 1"),"Carrito 1");
         Thread tre2 = new Thread(new Carrito(monitor, 7,"Carrito 2"),"Carrito 2");

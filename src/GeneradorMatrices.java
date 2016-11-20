@@ -72,7 +72,6 @@ public class GeneradorMatrices {
                     t_fin = Integer.parseInt(fila[1]);
                 }
 
-
                 intv = new Intervalo(transicion, t_ini, t_fin);
                 infoTiempo.add(transicion, intv);
                 transicion++;
@@ -85,9 +84,6 @@ public class GeneradorMatrices {
         tiempo = new Tiempo(infoTiempo);
         return tiempo;
     }
-
-
-
 
 
     public Matrix cargarArchivo(String String_archivo){

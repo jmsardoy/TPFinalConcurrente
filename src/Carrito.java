@@ -25,7 +25,7 @@ public class Carrito implements Runnable {
             System.out.println(name+" trata de disparar transicion "+disparoActual);
             int dispaux = disparoActual;
             disparo = disparoSiguiente();
-            monitor.dispararTransicion(disparo);
+            monitor.dispararTransicionConTiempo(disparo);
             System.out.println(name+" dispara transicion "+dispaux);
             dispaux = disparoActual;
 

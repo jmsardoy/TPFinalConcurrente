@@ -19,11 +19,11 @@ public class ProcesadorPetri {
         if(!disparo.and(sensibilizadas).isNull()){
             Matrix multiplicacion = I.mult(disparo.transpose());
             this.marcado = this.marcado.plus(multiplicacion.transpose());
-            System.out.println("disparo exitoso");
+            //System.out.println("disparo exitoso");
             return true;
         }
         else{
-            System.out.println("disparo no posible");
+           // System.out.println("disparo no posible");
             return false;
         }
 
