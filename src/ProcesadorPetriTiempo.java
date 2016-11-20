@@ -7,6 +7,8 @@ public class ProcesadorPetriTiempo extends ProcesadorPetri {
                                  Matrix lectores, Tiempo tiempo) {
         super(incidencia, marcaInicial, inhibidores, lectores);
         this.tiempo = tiempo;
+        tiempo.updateTimeStamps(this.getSensibilizadas());
+
     }
 
     public synchronized long dispararConTiempo(Matrix disparo) {
