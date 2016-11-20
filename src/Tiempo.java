@@ -20,11 +20,12 @@ public class Tiempo {
     }
 
     boolean puedeDisparar(int transicion){
-        infoTiempo.get(transicion).puedeDisparar();
+        return infoTiempo.get(transicion).puedeDisparar();
+
     }
 
     long getSleepTime(int transicion){
-        infoTiempo.get(transicion).getSleepTime();
+        return infoTiempo.get(transicion).getSleepTime();
     }
 
 

@@ -39,6 +39,7 @@ public class Intervalo {
         if(current_time < t_ini){
             return (t_ini - current_time);
         }
+        return 0;
     }
 
 }
