@@ -20,6 +20,7 @@ public class ProcesadorPetriTiempo extends ProcesadorPetri {
                 Matrix multiplicacion = I.mult(disparo.transpose());
                 this.marcado = this.marcado.plus(multiplicacion.transpose());
                 System.out.println("disparo exitoso");
+                tiempo.setCorriendo(disparo.matrixToIndex(), false);
                 tiempo.updateTimeStamps(this.getSensibilizadas());
                 return 0;
             }

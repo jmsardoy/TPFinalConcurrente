@@ -19,6 +19,10 @@ public class Tiempo {
         }
     }
 
+    void setCorriendo(int transicion, boolean corriendo){
+        infoTiempo.get(transicion).setCorriendo(corriendo);
+    }
+
     boolean puedeDisparar(int transicion){
         return infoTiempo.get(transicion).puedeDisparar();
 
