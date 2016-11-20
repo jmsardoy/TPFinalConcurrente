@@ -13,26 +13,6 @@ public class Intervalo {
         this.t_fin = t_fin;
     }
 
-    public int getTransicion() {
-        return transicion;
-    }
-
-    public int getT_ini() {
-        return t_ini;
-    }
-
-    public int getT_fin() {
-        return t_fin;
-    }
-
-    public long getT_stamp() {
-        return t_stamp;
-    }
-
-    public boolean estaCorriendo() {
-        return corriendo;
-    }
-
     public void setT_stamp() {
         if(!this.corriendo) {
             this.t_stamp = System.currentTimeMillis();
@@ -42,6 +22,23 @@ public class Intervalo {
 
     public void setCorriendo(boolean corriendo) {
         this.corriendo = corriendo;
+    }
+
+    public boolean puedeDisparar(){
+        if(this.corriendo){
+            long current_time = System.currentTimeMillis() - this.t_stamp;
+            if(this.t_ini <= current_time && current_time <= this.t_fin){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public long getSleepTime(){
+        long current_time = System.currentTimeMillis() - this.t_stamp;
+        if(current_time < t_ini){
+            return (t_ini - current_time);
+        }
     }
 
 }
