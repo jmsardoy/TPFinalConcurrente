@@ -25,6 +25,9 @@ public class Main {
         tiempo.imprimir();
         System.out.println("Marcado = \n"+marcado.toString());
 
+
+        MineControlView view = MineControlView.get_instance();
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
