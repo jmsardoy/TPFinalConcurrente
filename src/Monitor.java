@@ -66,13 +66,13 @@ public class Monitor {
         boolean desperto = false;
         boolean ejecuto_tiempo = false;
         Matrix sensibilizadas, dormidos, resultadoAnd, proxima;
-
+        System.out.println("quiere entrar al monitor: " + transicion.matrixToIndex());
         while (!ejecuto_tiempo) {
             mutex.lock();
             try {
                 while (!ejecute) {   //hasta que termine de ejecutar
                     long resultado_disparo = pro_petri.dispararConTiempo(transicion); //trato de disparar
-                    System.out.println("resultado disparo: " +resultado_disparo);
+                    System.out.println("intento disparar: " + transicion.matrixToIndex() + " -- resultado disparo: " +resultado_disparo);
                     if (resultado_disparo == 0) { //disparo exitoso
                         pro_petri.imprimirMarcado();
                         while (!ejecute_independientes) {
@@ -82,6 +82,7 @@ public class Monitor {
                             if (!resultadoAnd.isNull()) {                     //si tengo alguien que despertar
                                 proxima = prioridad.getMaxPrioridad(resultadoAnd);  //me fijo segun prioridades cual
                                 colas.despertar(proxima.matrixToIndex());    //despierto ese hilo
+                                System.out.println("despierto transicion: "+proxima.matrixToIndex());
                                 desperto = true;
                                 ejecute_independientes = true;                      // no ejecuto mas independientes
                             } else {      //si no tengo nadie que desperatar
@@ -92,7 +93,7 @@ public class Monitor {
                                     //fijarse si las automaticas pueden tener tiempo y si hace falta chequear
                                     // el resultado de este disparo.
                                     pro_petri.dispararConTiempo(proxima);           //la disparo
-                                    pro_petri.imprimirMarcado();
+                                    System.out.println("disparo automatica: "+ proxima.matrixToIndex());
                                 } else {
                                     ejecute_independientes = true;
                                 }               //si no hay mas automaticas salgo

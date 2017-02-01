@@ -21,20 +21,20 @@ public class ProcesadorPetriTiempo extends ProcesadorPetri {
                 //puede disparar
                 Matrix multiplicacion = I.mult(disparo.transpose());
                 this.marcado = this.marcado.plus(multiplicacion.transpose());
-                System.out.println("disparo exitoso");
+                //System.out.println("disparo exitoso");
                 tiempo.setCorriendo(disparo.matrixToIndex(), false);
                 tiempo.updateTimeStamps(this.getSensibilizadas());
                 return 0;
             }
             else{
                 //no puede disparar por el tiempo
-                System.out.println("disparo no posible por tiempos");
+                //System.out.println("disparo no posible por tiempos");
                 return tiempo.getSleepTime(disparo.matrixToIndex());
             }
         }
         else{
             //no puede disparar porque no esta sensibilizada
-            System.out.println("disparo no posiblie por sensibilizacion");
+            //System.out.println("disparo no posiblie por sensibilizacion");
             return -1;
         }
     }

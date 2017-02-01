@@ -17,7 +17,7 @@ public class SensorDeAgua implements Runnable {
     @Override
     public void run() {
         while(true) {
-            if (agua.getAgua() > 100) {
+            if (agua.getAgua() > 5) {
                 monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(nivelAlto, cantidad_de_transiciones));
                 monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(prender, cantidad_de_transiciones));
             } else {
