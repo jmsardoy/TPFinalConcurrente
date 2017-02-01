@@ -15,6 +15,12 @@ public class Matrix {
 
 	}
 
+	static public Matrix indexToMatrix(int index, int length){
+		Matrix newMatrix = new Matrix(1,length);
+		newMatrix.setVal(0,index,1);
+		return newMatrix;
+	}
+
 	public int[][] getDato() {
 		return dato;
 	}

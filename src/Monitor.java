@@ -92,7 +92,7 @@ public class Monitor {
                                     //fijarse si las automaticas pueden tener tiempo y si hace falta chequear
                                     // el resultado de este disparo.
                                     pro_petri.dispararConTiempo(proxima);           //la disparo
-
+                                    pro_petri.imprimirMarcado();
                                 } else {
                                     ejecute_independientes = true;
                                 }               //si no hay mas automaticas salgo
