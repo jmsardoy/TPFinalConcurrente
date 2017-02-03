@@ -6,18 +6,18 @@ public class SensorDeAgua implements Runnable {
     int apagar = 11;
     Monitor monitor;
     int cantidad_de_transiciones;
-    Agua agua;
+    VariablesExternas variables;
 
-    public SensorDeAgua(Monitor monitor, Agua agua, int cantidad_de_transiciones) {
+    public SensorDeAgua(Monitor monitor, VariablesExternas variables, int cantidad_de_transiciones) {
         this.monitor = monitor;
-        this.agua = agua;
+        this.variables = variables;
         this.cantidad_de_transiciones = cantidad_de_transiciones;
     }
 
     @Override
     public void run() {
         while(true) {
-            if (agua.getAgua() > 5) {
+            if (variables.getAgua()) {
                 monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(nivelAlto, cantidad_de_transiciones));
                 monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(prender, cantidad_de_transiciones));
             } else {

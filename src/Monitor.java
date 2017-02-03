@@ -4,16 +4,17 @@ public class Monitor {
     private ProcesadorPetriTiempo pro_petri;
     private Colas colas;
     private Matrix automaticas;
-
-
+    private Observer observer;
     private Mutex mutex = new Mutex();
 
-    public Monitor(ProcesadorPetriTiempo pro_petri, Politica prioridad, Colas colas, Matrix automaticas){
+    public Monitor(ProcesadorPetriTiempo pro_petri, Politica prioridad, Colas colas, Matrix automaticas,
+                   Observer observer){
 
         this.pro_petri = pro_petri;
         this.prioridad = prioridad;
         this.colas = colas;
         this.automaticas = automaticas;
+        this.observer = observer;
 
     }
 
@@ -74,6 +75,7 @@ public class Monitor {
                     long resultado_disparo = pro_petri.dispararConTiempo(transicion); //trato de disparar
                     System.out.println("intento disparar: " + transicion.matrixToIndex() + " -- resultado disparo: " +resultado_disparo);
                     if (resultado_disparo == 0) { //disparo exitoso
+                        observer.update(pro_petri.getMarcado());
                         pro_petri.imprimirMarcado();
                         while (!ejecute_independientes) {
                             sensibilizadas = pro_petri.getSensibilizadas(); //veo las sensibilizadas
@@ -93,6 +95,7 @@ public class Monitor {
                                     //fijarse si las automaticas pueden tener tiempo y si hace falta chequear
                                     // el resultado de este disparo.
                                     pro_petri.dispararConTiempo(proxima);           //la disparo
+                                    observer.update(pro_petri.getMarcado());
                                     System.out.println("disparo automatica: "+ proxima.matrixToIndex());
                                 } else {
                                     ejecute_independientes = true;

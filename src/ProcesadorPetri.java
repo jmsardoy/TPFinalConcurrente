@@ -28,7 +28,7 @@ public class ProcesadorPetri {
         }
 
 	}
-	
+	synchronized public Matrix getMarcado() { return this.marcado;}
 	synchronized public void imprimirMarcado(){
 		System.out.println("Marcado: "+ marcado.toString() );	
 	}
@@ -47,15 +47,12 @@ public class ProcesadorPetri {
                 sensibilizadas.setVal(0,i,0);
             }
         }
-
 		// deshabilitadas = inhibidores * sensibilizadas
 		Matrix deshabilitadas = inhibidores.transpose().mult(marcado.transpose()).transpose();
-		sensibilizadas = sensibilizadas.and(deshabilitadas.not());
+		sensibilizadas = sensibilizadas.and(deshabilitadas.toBinary().not());
         //sensibilizadas = this.deshabilitar(sensibilizadas.transpose(),deshabilitadas).transpose();
-
         Matrix lectoresDeshabilitados = lectores.transpose().mult(marcado.toBinary().not().transpose()).transpose();
-        sensibilizadas = sensibilizadas.and(lectoresDeshabilitados.not());
-
+        sensibilizadas = sensibilizadas.and(lectoresDeshabilitados.toBinary().not());
 		return sensibilizadas;
 	}
 
