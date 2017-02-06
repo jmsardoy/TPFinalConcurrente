@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 
-
 /*Clase que implementa la viste del reproductor de notas musicales*/
 
 
@@ -35,10 +34,8 @@ public class MineControlView implements Observer {
     private int CH4_alarma_TO = 4;
     private int CO_alarma = 37;
     private int CO_alarma_TO = 35;
-
-
+    
     /*Lista donde guardo los botones del teclado para poder hacer un update*/
-    //private List<JToggleButton> listaBotones = new ArrayList<JToggleButton>();
 
     private MineControlView(VariablesExternas variables) {
 
@@ -106,9 +103,6 @@ public class MineControlView implements Observer {
         toggleButton_H2O.setBackground(Color.WHITE);
         toggleButton_H2O.setBounds(267, 0, 133, 60);
         frame.getContentPane().add(toggleButton_H2O);
-
-
-
 
         /*Labels*/
         label_bomba = new JLabel("Bomba: ");
