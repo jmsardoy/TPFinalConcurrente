@@ -34,7 +34,7 @@ public class MineControlView implements Observer {
     private int CH4_alarma_TO = 4;
     private int CO_alarma = 37;
     private int CO_alarma_TO = 35;
-    
+
     /*Lista donde guardo los botones del teclado para poder hacer un update*/
 
     private MineControlView(VariablesExternas variables) {
