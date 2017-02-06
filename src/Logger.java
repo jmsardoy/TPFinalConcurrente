@@ -20,7 +20,7 @@ public class Logger {
 
         try{
             PrintWriter writer = new PrintWriter(nombre_archivo, "UTF-8");
-            writer.close();
+            //writer.close();
         } catch (IOException e) {
             System.out.println("No pude crear archivo");
         }

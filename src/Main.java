@@ -33,8 +33,8 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        ProcesadorPetriTiempo proce = new ProcesadorPetriTiempo(incidencia,marcado, inhibidores, lectores, tiempo);
+        Logger logger = new Logger("log.txt");
+        ProcesadorPetriTiempo proce = new ProcesadorPetriTiempo(incidencia,marcado, inhibidores, lectores, tiempo,logger);
         Monitor monitor = new Monitor(proce, politica, cola, transaut,view);
 
 

@@ -27,6 +27,7 @@ public class MineControlView implements Observer {
     private VariablesExternas variables;
 
     private int bomba_on = 18;
+    private int bomba_viajando = 19;
     private int bomba_off = 16;
     private int bomba_no_arrancar_por_gas = 14;
     private int bomba_parada_por_gas = 15;
@@ -135,6 +136,9 @@ public class MineControlView implements Observer {
         else if(marcado.getVal(0,bomba_parada_por_gas) == 1){
             label_bomba.setText("Bomba: Parada Por Gas");
         }
+        else if(marcado.getVal(0,bomba_viajando)==1){
+            label_bomba.setText("Bomba: Carritos viajando");
+        }
         else{
             label_bomba.setText("Bomba: Off");
 
@@ -142,18 +146,18 @@ public class MineControlView implements Observer {
 
         //update del sensor CH4
         if(marcado.getVal(0,CH4_alarma_ON) == 1){
-            label_alarma_CH4.setText("CH4: On");
+            label_alarma_CH4.setText("Alarma CH4: On");
         }
         else if(marcado.getVal(0,CH4_alarma_OFF)==1){
-            label_alarma_CH4.setText("CH4: Off");
+            label_alarma_CH4.setText("Alarma CH4: Off");
         }
 
         //update del sensor CO
         if(marcado.getVal(0,CO_alarma_ON) == 1){
-            label_alarma_CO.setText("CO: On");
+            label_alarma_CO.setText("Alarma CO: On");
         }
         else if(marcado.getVal(0,CO_alarma_OFF)==1){
-            label_alarma_CO.setText("CO: Off");
+            label_alarma_CO.setText("Alarma CO: Off");
         }
     }
 

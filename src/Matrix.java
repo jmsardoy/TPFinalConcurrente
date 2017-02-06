@@ -106,14 +106,13 @@ public class Matrix {
 	}
 
 	public String toString() {
-		String texto = "\n";
+		String texto = "";
 		for (int i = 0; i < this.getFil(); i++) {
 			for (int j = 0; j < this.getCol(); j++) {
-				texto += "\t " + this.dato[i][j];
+				texto += " " + this.dato[i][j];
 			}
-			texto += "\n";
+			//texto += "\n";
 		}
-		texto += "\n";
 		return texto;
 	}
 

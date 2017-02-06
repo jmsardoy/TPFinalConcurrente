@@ -2,11 +2,13 @@
 public class ProcesadorPetriTiempo extends ProcesadorPetri {
 
     Tiempo tiempo;
+    Logger logger;
 
     public ProcesadorPetriTiempo(Matrix incidencia, Matrix marcaInicial, Matrix inhibidores,
-                                 Matrix lectores, Tiempo tiempo) {
+                                 Matrix lectores, Tiempo tiempo, Logger logger) {
         super(incidencia, marcaInicial, inhibidores, lectores);
         this.tiempo = tiempo;
+        this.logger = logger;
         tiempo.updateTimeStamps(this.getSensibilizadas());
 
     }
@@ -21,6 +23,7 @@ public class ProcesadorPetriTiempo extends ProcesadorPetri {
                 //puede disparar
                 Matrix multiplicacion = I.mult(disparo.transpose());
                 this.marcado = this.marcado.plus(multiplicacion.transpose());
+                logger.printMatrixToFile(marcado);
                 //System.out.println("disparo exitoso");
                 tiempo.setCorriendo(disparo.matrixToIndex(), false);
                 tiempo.updateTimeStamps(this.getSensibilizadas());

@@ -67,7 +67,6 @@ public class Monitor {
         boolean desperto = false;
         boolean ejecuto_tiempo = false;
         Matrix sensibilizadas, dormidos, resultadoAnd, proxima;
-        System.out.println("quiere entrar al monitor: " + transicion.matrixToIndex());
         while (!ejecuto_tiempo) {
             mutex.lock();
             try {
