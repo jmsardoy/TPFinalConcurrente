@@ -18,7 +18,7 @@ public class SensorDeAgua implements Runnable {
     public void run() {
         while(true) {
             if (variables.getAgua()) {
-                monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(nivelAlto, cantidad_de_transiciones));
+                monitor.dispararTransicionConTiempo(Matrix. indexToMatrix(nivelAlto, cantidad_de_transiciones));
                 monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(prender, cantidad_de_transiciones));
             } else {
                 monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(nivelBajo, cantidad_de_transiciones));

@@ -1,16 +1,9 @@
 import javax.swing.JFrame;
 import javax.swing.JToggleButton;
 import java.awt.Color;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
 import java.awt.event.*;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /*Clase que implementa la viste del reproductor de notas musicales*/
@@ -42,9 +35,7 @@ public class MineControlView implements Observer {
     private int CO_alarma_ON = 41;
     private int CO_alarma_OFF = 39;
 
-
     /*Lista donde guardo los botones del teclado para poder hacer un update*/
-    //private List<JToggleButton> listaBotones = new ArrayList<JToggleButton>();
 
     private MineControlView(VariablesExternas variables) {
 
@@ -76,7 +67,7 @@ public class MineControlView implements Observer {
     private void initialize() {
         /*El marco de la ventana*/
         frame = new JFrame("Mina");
-        frame.setBounds(0, 0, 1000, 500);
+        frame.setBounds(0, 0, 407, 180);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -113,46 +104,22 @@ public class MineControlView implements Observer {
         toggleButton_H2O.setBounds(267, 0, 133, 60);
         frame.getContentPane().add(toggleButton_H2O);
 
-
-
-
         /*Labels*/
         label_bomba = new JLabel("Bomba: ");
         label_bomba.setFont(new Font("Dialog", Font.BOLD, 20));
-        label_bomba.setBounds(0, 168, 500, 23);
+        label_bomba.setBounds(0, 65, 500, 23);
         frame.getContentPane().add(label_bomba);
 
         label_alarma_CH4 = new JLabel("Alarma CH4: ");
         label_alarma_CH4.setFont(new Font("Dialog", Font.BOLD, 20));
-        label_alarma_CH4.setBounds(0, 219, 500, 23);
+        label_alarma_CH4.setBounds(0, 85, 500, 23);
         frame.getContentPane().add(label_alarma_CH4);
 
         label_alarma_CO = new JLabel("Alarma CO: ");
         label_alarma_CO.setFont(new Font("Dialog", Font.BOLD, 20));
-        label_alarma_CO.setBounds(0, 270, 500, 23);
+        label_alarma_CO.setBounds(0, 105, 500, 23);
         frame.getContentPane().add(label_alarma_CO);
 
-        /*Botones de start y stop*/
-        JButton btnStart = new JButton("Start");
-        btnStart.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //
-                //
-
-            }
-        });
-        btnStart.setBounds(684, 166, 117, 25);
-        frame.getContentPane().add(btnStart);
-
-        JButton btnStop = new JButton("Stop");
-        btnStop.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //
-                //
-            }
-        });
-        btnStop.setBounds(684, 197, 117, 25);
-        frame.getContentPane().add(btnStop);
     }
 
     @Override
