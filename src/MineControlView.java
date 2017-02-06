@@ -37,10 +37,10 @@ public class MineControlView implements Observer {
     private int bomba_off = 16;
     private int bomba_no_arrancar_por_gas = 14;
     private int bomba_parada_por_gas = 15;
-    private int CH4_alarma = 5;
-    private int CH4_alarma_TO = 4;
-    private int CO_alarma = 37;
-    private int CO_alarma_TO = 35;
+    private int CH4_alarma_ON = 44;
+    private int CH4_alarma_OFF = 42;
+    private int CO_alarma_ON = 41;
+    private int CO_alarma_OFF = 39;
 
 
     /*Lista donde guardo los botones del teclado para poder hacer un update*/
@@ -174,18 +174,18 @@ public class MineControlView implements Observer {
         }
 
         //update del sensor CH4
-        if(marcado.getVal(0,CH4_alarma) == 1 || marcado.getVal(0,CH4_alarma_TO)==1){
+        if(marcado.getVal(0,CH4_alarma_ON) == 1){
             label_alarma_CH4.setText("CH4: On");
         }
-        else{
+        else if(marcado.getVal(0,CH4_alarma_OFF)==1){
             label_alarma_CH4.setText("CH4: Off");
         }
 
         //update del sensor CO
-        if(marcado.getVal(0,CO_alarma) == 1 || marcado.getVal(0,CO_alarma_TO)==1){
+        if(marcado.getVal(0,CO_alarma_ON) == 1){
             label_alarma_CO.setText("CO: On");
         }
-        else{
+        else if(marcado.getVal(0,CO_alarma_OFF)==1){
             label_alarma_CO.setText("CO: Off");
         }
     }
