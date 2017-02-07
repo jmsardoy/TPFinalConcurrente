@@ -239,4 +239,20 @@ public class Matrix {
 		return resultado;
 	}
 
+	public Boolean isEquals(Matrix B){
+		if(this.getCol() != B.getCol() || this.getFil() != B.getFil()){
+			return false;
+		}
+		else{
+			for(int i = 0; i<this.getFil();i++){
+				for(int j=0; j<this.getCol();j++){
+					if(this.getVal(i,j) != B.getVal(i,j)){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
 }
