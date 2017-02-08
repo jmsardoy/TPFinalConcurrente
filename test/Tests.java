@@ -100,12 +100,55 @@ public class Tests {
         System.out.println("Marcado: "+marcado_inicial.toString());
 
         Matrix marcado_esperado = new Matrix(new int[][]{
-                {1,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,1}});
+                {1,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,1,1,0,0,0,0,1}});
         ProcesadorPetriTiempo proce = new ProcesadorPetriTiempo(incidencia,marcado_inicial, inhibidores, lectores, tiempo,logger);
         Monitor monitor = new Monitor(proce, politica, cola, transaut,view);
 
-        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(8,cantidad_de_transiciones));
-        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(10,cantidad_de_transiciones));
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(0,cantidad_de_transiciones));
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(3,cantidad_de_transiciones));
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(4,cantidad_de_transiciones));
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(7,cantidad_de_transiciones));
+
+        assertTrue(marcado_esperado.isEquals(proce.getMarcado()));
+
+    }
+
+    @Test
+    public void testNoHayGasOff(){
+        System.out.println("\nTest No Hay Gas Off");
+        Matrix marcado_inicial = new Matrix(new int[][]{
+                {1,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,1,1,0,0,0,0,1}});
+        System.out.println("Marcado: "+marcado_inicial.toString());
+
+        Matrix marcado_esperado = new Matrix(new int[][]{
+                {1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,1,0,0}});
+        ProcesadorPetriTiempo proce = new ProcesadorPetriTiempo(incidencia,marcado_inicial, inhibidores, lectores, tiempo,logger);
+        Monitor monitor = new Monitor(proce, politica, cola, transaut,view);
+
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(0,cantidad_de_transiciones));
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(3,cantidad_de_transiciones));
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(5,cantidad_de_transiciones));
+        //monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(7,cantidad_de_transiciones));
+
+        assertTrue(marcado_esperado.isEquals(proce.getMarcado()));
+
+    }
+
+    @Test
+    public void testNoHayGasPrender(){
+        System.out.println("\nTest No Hay Gas Off");
+        Matrix marcado_inicial = new Matrix(new int[][]{
+                {1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,1,1,0,0,0,0,1}});
+        System.out.println("Marcado: "+marcado_inicial.toString());
+
+        Matrix marcado_esperado = new Matrix(new int[][]{
+                {1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,1,0,0}});
+        ProcesadorPetriTiempo proce = new ProcesadorPetriTiempo(incidencia,marcado_inicial, inhibidores, lectores, tiempo,logger);
+        Monitor monitor = new Monitor(proce, politica, cola, transaut,view);
+
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(0,cantidad_de_transiciones));
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(3,cantidad_de_transiciones));
+        monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(5,cantidad_de_transiciones));
         monitor.dispararTransicionConTiempo(Matrix.indexToMatrix(20,cantidad_de_transiciones));
 
         assertTrue(marcado_esperado.isEquals(proce.getMarcado()));
